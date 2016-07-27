@@ -4,33 +4,36 @@ import (
     "fmt"
 )
 
-func syracuse(x,altmax,indice int) (bool,int,int) {
+func syracuse(x,altitude_max,tps int) (bool,int,int) {
 
-
+    if x > 0 {
     if  x == 1 {
 
-    return true,indice,altmax
+        return true,tps,altitude_max
+     } else if x%2 == 0 {
 
-   } else if x%2 == 0 {
-
-       indice = indice+1
-       if altmax <= x {
-       altmax = x
+      tps = tps+1
+       if altitude_max <= x {
+       altitude_max = x
        }
-      return syracuse(x/2,altmax,indice)
+       return syracuse(x/2,altitude_max,tps)
 
     } else {
 
-        indice = indice+1
-       if altmax <= x {
-       altmax = x
+        tps = tps+1
+       if altitude_max <= x {
+       altitude_max = x
        }
-       return syracuse(3*x+1,altmax,indice)
+       return syracuse(3*x+1,altitude_max,tps)
 
     }
+} else {
+     return false,0,0
+}
+
 }
 
 func main() {
-    var altmax,indice int
-    fmt.Println(syracuse(15,altmax,indice))
+    var altitude_max,tps int
+    fmt.Println(syracuse(127,altitude_max,tps))
 }
