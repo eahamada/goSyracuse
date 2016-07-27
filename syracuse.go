@@ -2,29 +2,35 @@ package main
 
 import (
     "fmt"
-    "math"
 )
 
+func syracuse(x,altmax,indice int) (bool,int,int) {
 
-func check(nbr float64) bool {
-    if nbr%2 ==0 {
-        return true
-    }else {
-        return false
-    }
-}
 
-func syracuse(x int) (bool,int,int) {
+    if  x == 1 {
 
-    if x == 4 || x == 2 || x == 1 {
-       return true
-    } else if x%2 == 0 {
-        return check(x/2)
+    return true,indice,altmax
+
+   } else if x%2 == 0 {
+
+       indice = indice+1
+       if altmax <= x {
+       altmax = x
+       }
+      return syracuse(x/2,altmax,indice)
+
     } else {
-        return check(3*x+1)
-    }
 
+        indice = indice+1
+       if altmax <= x {
+       altmax = x
+       }
+       return syracuse(3*x+1,altmax,indice)
+
+    }
 }
+
 func main() {
-    fmt.Println(8%2)
+    var altmax,indice int
+    fmt.Println(syracuse(15,altmax,indice))
 }
